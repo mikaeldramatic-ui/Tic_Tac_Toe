@@ -1,0 +1,62 @@
+2025-10-01
+
+Task:
+Today we got our first assignment from our teacher Bill, were going to build our own Ti-Tac Toe.
+Game base on to make a 3 in row with X or O.
+
+Thought´s and ideas:
+Want to create a good story that makes this game more excitment and not to use 2D or 3D grahics.
+
+Game ideas that i want to create a theme, knight's game or sea diving in the ocean.
+
+How Many players?
+from 1-4 players but will start with 2 players, there fore will extend that every player will meet CPU as a
+option.
+
+Gameboard:
+A simple 3x3 square as a beginning, don't know if I want to make it bigger as a final boss.
+
+Textbase?
+Yes, though's that dialogs will be shown in the game as "Trash talk" and of course winning and loosing lines.
+
+
+What happens if one wins the game?
+
+This game consist of getting hold of keys, for every each win you'll get a key that opens a chest.
+Inside of a chest it will contains a letter and will forming the word "WIN".
+If game is between 1-vs-1 it will be best of 5.
+
+
+Story about Knight:
+I'ts a big battle going on and King Arthurs nemesis "Mordred" is attacking the villages and castle.
+But Mordred is not alone, he has a dragon by it's side as a fearson weapon.
+
+Enviroment of Knight:
+Enviroment 1 - The Armory - Wich playser will carry King Arthurs sword "Excalibur".
+Enviroment 2 - Stable - Wich player will ride King Arthurs horse "Llamrei".
+Enivorment 3 - Battlefield - Who will survive the battle against Mordred and his men before
+               Meeting the dragon.
+Enviroment 4 - The Final Battle - Fighting against the dragon.
+
+If Win : The Battle is over and player will be a hero and enter the history books.
+If Lose: Dragon hits the player with it's tail and then breathing fire against player.
+
+
+Story About Sea diving:
+You have heard that there's a big treasure at the bottom of the sea, you have start en expedition
+and starting to dive into the bottom of the sea.
+
+Enviroment of Sea diving:
+
+Enviroment 1 - The Coroals - Diver is looking for clues and sees a oyster that has something shiny
+               inside.
+Enviroment 2 - Swimming along the coral reef and see's a shipwreck, but at the same time there's a shark
+               that is attacking player.
+Enviroment 3 - Player succeds and it's inside of the shipwreck, searching around and found the treasure.
+               But sees that  a big octupus is guarding and you have to fight.
+
+If Win : The octopus dissapears and player can take the treasure back to the boat.
+If Loose : The octopus capture player and squeeshing til player dies.
+
+Terminal : If it's okay to create with help of 1´s or 0´s to shape to a sword, horse and dragon.
+           And also Oyster, ship and a octopus.

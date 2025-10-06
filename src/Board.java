@@ -37,7 +37,7 @@ public class Board {
 
     //    Check if a cell is empty
     public boolean isEmpty(int row, int col) {
-        if (!inBound(row, col)) return false;
+        if (!inBounds(row, col)) return false;
         return grid[row][col] == CellState.EMPTY;
     }
 
@@ -54,7 +54,7 @@ public class Board {
         return moves;
     }
 
-    public boolean isFULL() {
+    public boolean isFull() {
         return getAvailableMoves().isEmpty();
     }
 
@@ -102,6 +102,9 @@ public class Board {
         return grid[row][col];
     }
 
+    private boolean inBounds(int row, int col) {
+        return row >=0 && row < SIZE && col >= 0 && col < SIZE;
+    }
     //for debugging simple consoleprint - UI can choose not to use it
     @Override
     public String toString() {

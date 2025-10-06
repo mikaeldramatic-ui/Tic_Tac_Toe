@@ -1,14 +1,15 @@
-public class abstract Player {
+public abstract class Player {
     private final String name;
-//    X or O
+
+    //    X or O
     private final CellState symbol;
 
     public Player(String name, CellState symbol) {
         if (symbol == CellState.EMPTY) {
             throw new IllegalArgumentException("Player must have symbol X or O, not EMPTY.");
         }
-                this.name;
-                this.symbol;
+                this.name = name;
+                this.symbol = symbol;
     }
 
 //    Shall return a move (row or colon) based on actual board
@@ -21,7 +22,7 @@ public class abstract Player {
         return name;
     }
 
-    public String getSymbol() {
+    public CellState getSymbol() {
         return symbol;
     }
 

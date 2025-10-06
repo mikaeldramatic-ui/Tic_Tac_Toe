@@ -1,16 +1,20 @@
 import java.util.Scanner;
 
+
 public class Main {
+
+    private static final Scanner scanner = new Scanner(System.in);
+    private static final Board board = new Board();
+
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        Board board = new Board();
+
 
 //        Create human player/s
         System.out.println("Enter your name: ");
         String playerName = scanner.nextLine();
         Player p1 = new HumanPlayer(playerName, CellState.X);
 
-        Difficulty difficulty = askDifficulty(scanner);
+        Difficulty difficulty = askDifficulty();
         Player p2 = new CpuPlayer("Bot", CellState.O, difficulty);
 
         //        Example beneath when yo''l implements HumanPlayer and CpuPlayer
@@ -24,8 +28,9 @@ public class Main {
         game.play();
 
         scanner.close();
+    }
 
-        private static Difficulty askDifficulty (Scanner scanner){
+        private static Difficulty askDifficulty() {
             while (true) {
                 System.out.println(" Chose Difficulty : ");
                 System.out.println(" 1. Easy Peasy ");
@@ -33,7 +38,7 @@ public class Main {
                 System.out.println(" 3. WRECKLESS! ");
                 System.out.println(" Your Choice: ");
 
-                String input = scanner.nextLine();
+                String input = scanner.nextLine().trim();
 
                 switch (input) {
                     case "1":
@@ -49,4 +54,3 @@ public class Main {
         }
 
     }
-}

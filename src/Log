@@ -1,2 +1,10 @@
 2025-10-03
 Created Gamecontroller.java & Player.java, trying to make more classes and have a freespaced Main.java
+
+Board.java issues-
+Still having problems with !inBounds that keeps getting problems, wonder why.
+
+2025-10-06
+Solve the issues with !inbounds an other errors like isFull and scanner error.
+Runned the game and it worked.
+Iv'e alo added DialougeManager and DialougeEvent for some "trash talk" in game.

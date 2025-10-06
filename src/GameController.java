@@ -1,7 +1,6 @@
 import java.util.Optional;
 
 public class GameController {
-
     private final Board board;
     private Player currentPlayer;
     private Player otherPlayer;
@@ -23,9 +22,8 @@ public class GameController {
     public void play() {
 //        keep in mind to reset board before start
         board.initialize();
-    }
 
-    if(verbose) {
+        if (verbose) {
         System.out.println("Let the game begins!");
         printBoard();
     }
@@ -41,7 +39,7 @@ boolean success = board.setMove(move.getRow(), move.getCol(), currentPlayer.getS
 if (!success) {
 //    Invalid move, send message and continues looping that the same player can choose again.
     if (verbose) {
-        System.out.println(currentPlayer.getName()+" Invalid move " + move + "Try again!";
+        System.out.println(currentPlayer.getName() + " Invalid move " + move + "Try again!");
     }
 //    getMove will call again in the next iteration of while (same player)
     continue;
@@ -62,7 +60,6 @@ Optional<CellState> maybeWinner = board.checkWinner();
                 System.out.println("We have a winner!! :" + winnerSymbol);
                 System.out.println(currentPlayer.getName() + " Wins!");
             }
-
             onGameEnd(winnerSymbol);
             break;
         }
@@ -74,6 +71,7 @@ Optional<CellState> maybeWinner = board.checkWinner();
             onGameEnd(null);
             break;
         }
+
 //        swap turn
         swapPlayers();
     }
@@ -87,13 +85,13 @@ private void onGameEnd(CellState winnerSymbol) {
     } else {
 //        Identifies which player won
         Player winner = (currentPlayer.getSymbol() == winnerSymbol) ? currentPlayer : otherPlayer;
-        System.out.println("Congrats " + winner.getName() + "You are the winner" + winnerSymbol.getSymbol());
+        System.out.println("Congrats " + winner.getName() + " You are the winner " + winner.getSymbol());
     }
 
 //    Can put dialogueManager or update highscore
 }
 
-//Switch who is the current or otherplayer
+//Switch who is the current or otherPlayer
 private void swapPlayers() {
     Player tmp = currentPlayer;
     currentPlayer = otherPlayer;
@@ -119,4 +117,4 @@ public Player getOtherPlayer() {
 
 }
 
-}
+

@@ -24,55 +24,53 @@ public class DialogueManager {
     }
     private void initDefaultPhrases() {
         phrases.put(DialogueEvent.PRE_MOVE,Arrays.asList(
-                "You're going down!!",{HumanPlayer,CpuPlayer},
-                "Let's me see here.....",{HumanPlayer,CpuPlayer},
-                "Let's Rock!", {CpuPlayer,CpuPlayer},
-                "Meet your maker!", {CpuPlayer,Player},
+                "You're going down!!, {Player}",
+                "Let's see here,{CpuPlayer}",
+                "Let's Rock!, {Player}",
+                "Meet your maker!, {CpuPlayer}"
         ));
 
         phrases.put(DialogueEvent.POST_MOVE,Arrays.asList(
-                "Well that´s was a pour move",{CpuPlayer},
-                "My mother plays better than you", {HumanPlayer},
-                "DO you know this move....*Smack*", {HumanPlayer, CpuPlayer},
+                "Well that´s was a pour move,{CpuPlayer}",
+                "My mother plays better than you, {Player}",
+                "DO you know this move....*Smack*, {Player}"
         ));
 
         phrases.put(DialogueEvent.WIN,Arrays.asList(
-                "HA,I WIN ",{CpuPlayer , HumanPlayer},
-                "I believe that i've won this battle", {HumanPlayer},
-                "Oh i'm sorry, should I call you loser from here now ?", {HumanPlayer, CpuPlayer},
+                "HA,I WIN ,{Player}",
+                "I believe that i've won this battle, {Player}",
+                "Oh i'm sorry, should I call you loser from here now ?, {Player}"
                 ));
 
         phrases.put(DialogueEvent.LOSE,Arrays.asList(
-                "Dance for me loser ",{CpuPlayer},
-                "Better luck next time", {HumanPlayer},
-                "Winner starts with W and yours is L for LOOOOSER", {HumanPlayer, CpuPlayer},
+                "Dance for me loser ,{CpuPlayer}",
+                "Better luck next time, {Player}",
+                "Winner starts with W and yours is L for LOOOOSER, {CpuPlayer}"
                 ));
 
         phrases.put(DialogueEvent.TIE, Arrays.asList(
-                "HOW COULD THIS BE A TIE",{CpuPlayer},
-                "TIE TIE TIE TIE", {HumanPlayer},
-                "WE NEED A WINNER!", {HumanPlayer, CpuPlayer},
+                "HOW COULD THIS BE A TIE,{CpuPlayer}",
+                "TIE TIE TIE TIE, {Player}",
+                "WE NEED A WINNER!,{Player}"
                 ));
 
         phrases.put(DialogueEvent.BLOCK ,Arrays.asList(
-                "OH NOT TODAY!",{CpuPlayer},
-                "Close but no cigarr", {HumanPlayer},
-                "B is for...BLOCKING", {HumanPlayer, CpuPlayer},
+                "OH NOT TODAY!,{CpuPlayer}",
+                "Close but no cigarr, {HumanPlayer}",
+                "B is for...BLOCKING, {CpuPlayer}"
                 ));
         phrases.put(DialogueEvent.ILLEGAL_MOVE,Arrays.asList(
-                "Play fair!",{CpuPlayer},
-                "Learn the rules stupid!", {HumanPlayer},
-                "Come on Grandma, learn how to play", {HumanPlayer, CpuPlayer},
+                "Play fair!,{CpuPlayer}",
+                "Learn the rules stupid!, {HumanPlayer}",
+                "Come on Grandma, learn how to play, {CpuPlayer}"
                 ));
 
 
 
     }
-public String getLine (Player actor, Player opponent , DialogueEvent, Move move) {
+public String getLine (Player actor, Player opponent , DialogueEvent event, Move move) {
         double prob = eventProbability.getOrDefault(event, 1.0);
-        if (rnd.nextDouble() >prob) {
-            return "";
-        }
+        if (random.nextDouble() >prob) return "";
 
         List<String> list = phrases.getOrDefault(event, Collections.emptyList());
         if (list.isEmpty()) return "";
@@ -87,8 +85,8 @@ public String getLine (Player actor, Player opponent , DialogueEvent, Move move)
         return formatted;
 }
 
-public String getLine(Player actor, dialougeEvent event) {
-        return getLine(actor, null, event, null);
+public String getLine(Player actor, DialogueEvent event) {
+        return getLine(actor,null, event, null);
 }
 
 private String pickNonRepeating(List<String> list, String last) {
@@ -96,30 +94,28 @@ private String pickNonRepeating(List<String> list, String last) {
         String pick;
         int attempts = 0;
         do {
-            pick = list.get(rnd.nextInt(list.size()));
+            pick = list.get(random.nextInt(list.size()));
             attempts++;
-
         } while (pick.equals(last) && attempts <5);
         return pick;
 }
 
 private String formatPhrase(String template, Player actor , Player opponent, Move move) {
         String result = template;
-        if (actor != null) result = result.replace("{Player}", actor.getName());
-        if(opponent != null)result = result.replace("{Opponent}", opponent.getName());
-        if (move !=null){
-            result = result.replace("{row}"), String.valueOF(move.getRow()));
-            result = result.replace("{col}"), String.valueOF(move.getCol()));
+        if (actor != null) result = result.replace("{player}", actor.getName());
+        if(opponent != null)result = result.replace("{opponent}", opponent.getName());
+        if (move !=null) {
+            result = result.replace("{row}", String.valueOf(move.getRow()));
+            result = result.replace("{col}", String.valueOf(move.getCol()));
         }
         return result;
 }
 
 public void setEventProbability ( DialogueEvent event, double probability) {
         eventProbability.put(event, Math.max(0.0,Math.min(1.0, probability)));
+    }
 
-}
-
-public void addPhrase(dialougeEvent event, String phrase) {
+public void addPhrase(DialogueEvent event, String phrase) {
         phrases.computeIfAbsent(event, k-> new ArrayList<>()).add(phrase);
 }
 

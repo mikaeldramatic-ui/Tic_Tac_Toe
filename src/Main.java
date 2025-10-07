@@ -17,6 +17,10 @@ public class Main {
         Difficulty difficulty = askDifficulty();
         Player p2 = new CpuPlayer("Bot", CellState.O, difficulty);
 
+        DialogueManager dialogueManager = new DialogueManager();
+
+
+
         //        Example beneath when yo''l implements HumanPlayer and CpuPlayer
 
 //        Implements by itself
@@ -24,8 +28,7 @@ public class Main {
 //        Implements by itself
 //        Player p2 = new CpuPlayer ("Bot", CellState.O, new RandomStrategy());
 
-        GameController game = new GameController(board, p1, p2, true);
-        game.play();
+
 
         scanner.close();
     }

@@ -5,25 +5,20 @@ public class GameController {
     private Player currentPlayer;
     private Player otherPlayer;
     private final DialogueManager dialogueManager;
-    private final boolean showDialougeToConsole;
-//    IF true, prints out on board/status to console
+    private final boolean showDialogueToConsole;
     private boolean verbose;
+
+    public GameController(Board board) {
+        this.board = board;
+        showDialogueToConsole = true;
+        dialogueManager = dialogueManager;
+    }
 
 //    Put Constructor
 
-    public GameController(Board board, Player currentPlayer, Player otherPlayer,
-                          DialogueManager dialogueManager, boolean showDialougeToConsole, boolean verbose) {
-        this.board = board;
-        this.currentPlayer = currentPlayer;
-        this.otherPlayer = otherPlayer;
-        this.dialogueManager = dialogueManager;
-        this.showDialougeToConsole = showDialougeToConsole;
-        this.verbose = verbose;
-    }
-
 
 //    Starting game loop, method run until winner or tie
-//    Will ask currentplayer for a move, trying to put on board and continutes til game is over
+//    Will ask currentplayer for a move, trying to put on board and continues til game is over
 
     public void play() {
 //        keep in mind to reset board before start
@@ -37,54 +32,46 @@ public class GameController {
     while (true) {
 
         String pre = dialogueManager.getLine(currentPlayer, otherPlayer, DialogueEvent.PRE_MOVE,null);
-        if (!pre.isEmpty() && showDialougeToConsole) {
+        if (!pre.isEmpty() && showDialogueToConsole) {
             System.out.println(currentPlayer.getName() + " Is saying: " + pre);
         }
-
-        String post = dialogueManager.getLine(currentPlayer, otherPlayer, dialougeEvent.POST_MOVE, move);
-        if (!post.isEmpty() && showDialougeToConsole) {
-            System.out.println(currentPlayer.getName() + "Is saying: " + post );
-        }
-
-        String block = dialogueManager.getLine(currentPlayer , otherPlayer , DialogueEvent.BLOCK, move);
-        if (!block.isEmpty() && showDialougeToConsole){
-            System.out.println(currentPlayer.getName() + "Is saying: " + block);
-        }
-//        ask currentplayer to make a move
-
         Move move = currentPlayer.getMove(board);
 
-//        Try to make move . If invalid - ask for a new move (loop)
         boolean success = board.setMove(move.getRow(), move.getCol(), currentPlayer.getSymbol());
 
         if (!success) {
-//    Invalid move, send message and continues looping that the same player can choose again.
-        if (verbose) {
-        System.out.println(currentPlayer.getName() + " Invalid move " + move + "Try again!");
-    }
-//    getMove will call again in the next iteration of while (same player)
-    continue;
-}
+            if (verbose) {
+                System.out.println(currentPlayer.getName() + "Invalid move" + move + "try again!");
+            }
+            String Illegal = dialogueManager.getLine(currentPlayer, otherPlayer, DialogueEvent.ILLEGAL_MOVE, move);
+            if (!Illegal.isEmpty()&& showDialogueToConsole) {
+                System.out.println(currentPlayer.getName() + "Is saying; " + Illegal);
+            }
+            continue;
+        }
 
-//Move succseeds, show board
-
         if (verbose) {
-            System.out.println(currentPlayer.getName() + " Played " + move + " like " +currentPlayer.getSymbol());
+            System.out.println(currentPlayer.getName() + " Played "+ move +" as " + currentPlayer.getSymbol());
             printBoard();
         }
 
-//Check winner
-Optional<CellState> maybeWinner = board.checkWinner();
-        if (maybeWinner.isPresent()) {
+        String post = dialogueManager.getLine(currentPlayer, otherPlayer, DialogueEvent.POST_MOVE, move);
+        if (!post.isEmpty() && showDialogueToConsole) {
+            System.out.println(currentPlayer.getName() + "Is saying: " + post );
+        }
+
+        Optional<CellState> maybeWinner = board.checkWinner();
+        if(maybeWinner.isPresent()) {
             CellState winnerSymbol = maybeWinner.get();
             if (verbose) {
-                System.out.println("We have a winner!! :" + winnerSymbol);
-                System.out.println(currentPlayer.getName() + " Wins!");
+                System.out.println("We have a winner!: " + winnerSymbol);
+                System.out.println(currentPlayer.getName() + " wins! ");
             }
             onGameEnd(winnerSymbol);
             break;
         }
-//        Check if it's TIE
+
+        //        Check if it's TIE
         if (board.isFull()) {
             if (verbose) {
                 System.out.println("The board is full -- it's a TIE!");
@@ -92,60 +79,64 @@ Optional<CellState> maybeWinner = board.checkWinner();
             onGameEnd(null);
             break;
         }
-
-//        swap turn
         swapPlayers();
     }
-}
 
-//Calls when games finished - winnerSymbol null => TIE
-
-private void onGameEnd(CellState winnerSymbol) {
-    if (winnerSymbol == null) {
-        System.out.println( " Results : TIE!");
-        String tieForp1 = dialogueManager.getLine(currentPlayer, otherPlayer, DialogueEvent.TIE, null);
-        if (!tieForp1.isEmpty()) System.out.println(currentPlayer.getName() + "Is saying; " + tieForp1);
-        String tieForp2 = dialogueManager.getLine(otherPlayer, otherPlayer, DialogueEvent.TIE, null);
-        if (!tieForp2.isEmpty()) System.out.println(currentPlayer.getName() + "Is saying; " + tieForp2);
-        return;
     }
-//    Can put dialogueManager or update highscore
+    //Calls when games finished - winnerSymbol null => TIE
 
-    Player winner = (currentPlayer.getSymbol() == winnerSymbol) ? currentPlayer : otherPlayer;
-    Player loser = (winner== currentPlayer) ? otherPlayer : currentPlayer;
-    System.out.println("Congrats "+ winner.getName() + "! You are the winner (" + winner.getSymbol() + ")");
+    private void onGameEnd(CellState winnerSymbol) {
+        if (winnerSymbol == null) {
+            System.out.println( " Results : TIE!");
+            String tieForP1 = dialogueManager.getLine(currentPlayer, otherPlayer, DialogueEvent.TIE, null);
+            if (!tieForP1.isEmpty()) System.out.println(currentPlayer.getName() + "Is saying; " + tieForP1);
+            String tieForP2 = dialogueManager.getLine(otherPlayer, otherPlayer, DialogueEvent.TIE, null);
+            if (!tieForP2.isEmpty()) System.out.println(currentPlayer.getName() + "Is saying; " + tieForP2);
+            return;
+        }
 
-    String win= dialogueManager.getLine(winner,loser,dialogueEvent.WIN, null);
-    if(!win.isEmpty()) System.out.println(winner.getName() + "Is saying: "+ win);
+        Player winner = (currentPlayer.getSymbol() == winnerSymbol) ? currentPlayer : otherPlayer;
+        Player loser = (winner== currentPlayer) ? otherPlayer : currentPlayer;
+        System.out.println("Congrats "+ winner.getName() + "! You are the winner (" + winner.getSymbol() + ")");
 
-    String lose= dialogueManager.getLine(loser,winner,dialogueEvent.LOSE, null);
-    if(!lose.isEmpty()) System.out.println(winner.getName() + "Is saying: "+ lose);
+        String win= dialogueManager.getLine(winner,loser,DialogueEvent.WIN, null);
+        if(!win.isEmpty()) System.out.println(winner.getName() + "Is saying: "+ win);
+
+        String lose= dialogueManager.getLine(loser,winner,DialogueEvent.LOSE, null);
+        if(!lose.isEmpty()) System.out.println(winner.getName() + "Is saying: "+ lose);
     }
 
-//Switch who is the current or otherPlayer
-private void swapPlayers() {
-    Player tmp = currentPlayer;
-    currentPlayer = otherPlayer;
-    otherPlayer = tmp;
-}
+    //Switch who is the current or otherPlayer
+    private void swapPlayers() {
+        Player tmp = currentPlayer;
+        currentPlayer = otherPlayer;
+        otherPlayer = tmp;
+    }
 
-//Helpmethod to print on board thru board.toString()
-private void printBoard() {
-    System.out.println(board.toString());
-}
+    //Helpmethod to print on board thru board.toString()
+    private void printBoard() {
+        System.out.println(board.toString());
+    }
 //Optional getters for testing or UI
 
-public Board getBoard() {
-    return board;
-}
-public Player getCurrentPlayer() {
-    return currentPlayer;
+    public Board getBoard() {
+        return board;
+    }
+    public Player getCurrentPlayer() {
+        return currentPlayer;
+    }
+
+    public Player getOtherPlayer() {
+        return otherPlayer;
+    }
+
 }
 
-public Player getOtherPlayer() {
-    return otherPlayer;
-}
 
-}
+//        String block = dialogueManager.getLine(currentPlayer , otherPlayer , dialogueEvent.BLOCK, move);
+//        if (!block.isEmpty() && showDialogueToConsole){
+//            System.out.println(currentPlayer.getName() + "Is saying: " + block);
+//        }
+
 
 

@@ -1,12 +1,12 @@
-//public enum DialogueEvent {
-//    PRE_MOVE,
-//    POST_MOVE,
-//    WIN,
-//    LOSE,
-//    TIE,
-//    BLOCK,
-//    ILLEGAL_MOVE
-//}
+public enum DialogueEvent {
+    PRE_MOVE,
+    POST_MOVE,
+    WIN,
+    LOSE,
+    TIE,
+    BLOCK,
+    ILLEGAL_MOVE
+}
 //
 ////    PRE_MOVE = Before player makes it move
 ////    POST_MOVE = After the player makes it move

@@ -7,4 +7,25 @@ Still having problems with !inBounds that keeps getting problems, wonder why.
 2025-10-06
 Solve the issues with !inbounds an other errors like isFull and scanner error.
 Runned the game and it worked.
-Iv'e alo added DialougeManager and DialougeEvent for some "trash talk" in game.
+Iv'e alo added DialogManager and DialogEvent for some "trash talk" in game.
+
+2025-10-09
+
+Ive recently found an error when it comes to the game.
+If i play on easy mode , normal or hard it dosen't change to those levels. its the same default.
+On easy you if only 2 in a row from row 0 and row 1, row 2 gets a win.
+And also ive founded that if im playing on "normal" , it will not end the game when Ive got
+three in a row dosen't end the game.
+And on hard you also wins with 2 in a row from 0,0 and 1,0.
+
+Need to find out what happens in code
+
+Solved with Ai's code
+
+Solved also problems with Board.java with help of Ai's code
+
+2025-10-10
+Ive recently found out that I needed to add methods like quit game, change row or colon when its full or square is taken.
+Resolved and also added a extra player (player 2) and write name
+
+See if theres more to add or change later on....

@@ -8,11 +8,6 @@ public class Move {
         this.col = col;
     }
 
-    //    public Move(int row, int col) {
-//        this.row;
-//        this.col;
-//    }
-
     public int getRow() { return row;}
     public int getCol() { return col;}
 

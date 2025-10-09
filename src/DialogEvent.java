@@ -1,4 +1,4 @@
-public enum DialogueEvent {
+public enum DialogEvent {
     PRE_MOVE,
     POST_MOVE,
     WIN,

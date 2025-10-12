@@ -11,7 +11,6 @@ public class Board {
         initialize();
     }
 
-    // Initiera brädet med EMPTY
     public void initialize() {
         for (int r = 0; r < SIZE; r++) {
             for (int c = 0; c < SIZE; c++) {
@@ -20,7 +19,6 @@ public class Board {
         }
     }
 
-    // Försök göra ett drag; returnerar true om lyckat
     public boolean setMove(int row, int col, CellState symbol) {
         if (!inBounds(row, col) || symbol == null || symbol == CellState.EMPTY) {
             return false;
@@ -32,13 +30,11 @@ public class Board {
         return true;
     }
 
-    // Är en cell tom?
     public boolean isEmpty(int row, int col) {
         if (!inBounds(row, col)) return false;
         return grid[row][col] == CellState.EMPTY;
     }
 
-    // Lista alla tillgängliga drag
     public List<Move> getAvailableMoves() {
         List<Move> moves = new ArrayList<>();
         for (int r = 0; r < SIZE; r++) {
@@ -51,14 +47,12 @@ public class Board {
         return moves;
     }
 
-    // Är brädet fullt?
     public boolean isFull() {
         return getAvailableMoves().isEmpty();
     }
 
-    // Kolla vinnare: returnerar Optional.of(X/O) eller Optional.empty()
     public Optional<CellState> checkWinner() {
-        // Horisontella rader
+
         for (int r = 0; r < SIZE; r++) {
             if (grid[r][0] != CellState.EMPTY &&
                     grid[r][0] == grid[r][1] &&
@@ -67,7 +61,6 @@ public class Board {
             }
         }
 
-        // Vertikala kolumner
         for (int c = 0; c < SIZE; c++) {
             if (grid[0][c] != CellState.EMPTY &&
                     grid[0][c] == grid[1][c] &&
@@ -76,14 +69,12 @@ public class Board {
             }
         }
 
-        // Diagonal (topp-left -> bot-right)
         if (grid[0][0] != CellState.EMPTY &&
                 grid[0][0] == grid[1][1] &&
                 grid[1][1] == grid[2][2]) {
             return Optional.of(grid[0][0]);
         }
 
-        // Diagonal (topp-right -> bot-left)
         if (grid[0][2] != CellState.EMPTY &&
                 grid[0][2] == grid[1][1] &&
                 grid[1][1] == grid[2][0]) {
@@ -93,25 +84,21 @@ public class Board {
         return Optional.empty();
     }
 
-    // Hämta en cell (eller kasta om out of bounds)
     public CellState getCell(int row, int col) {
         if (!inBounds(row, col)) throw new IndexOutOfBoundsException("Cell out of bounds");
         return grid[row][col];
     }
 
-    // Hjälpmetod: kontroll av bounds
     private boolean inBounds(int row, int col) {
         return row >= 0 && row < SIZE && col >= 0 && col < SIZE;
     }
 
-    // Återställ en cell till EMPTY (används av AI-simulering)
     public void resetCell(int row, int col) {
         if (inBounds(row, col)) {
             grid[row][col] = CellState.EMPTY;
         }
     }
 
-    // Enkel textrepresentation (för konsol)
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

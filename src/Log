@@ -24,8 +24,25 @@ Solved with Ai's code
 
 Solved also problems with Board.java with help of Ai's code
 
-2025-10-10
+2025-10-10 night
 Ive recently found out that I needed to add methods like quit game, change row or colon when its full or square is taken.
 Resolved and also added a extra player (player 2) and write name
 
 See if theres more to add or change later on....
+
+2025-10-10 daytime
+I changed my mind wih the dialogevent BLOCK, it dosen't feel it's function and im using more Pre Move so can say more cheecky
+stuff.
+
+Im going to try to add a wlecome sign and see if i Can get a good game story.
+
+2025-10-12
+Once more i've got error on GameController.java and ended up with error on StoryManager also.
+Ive also created HighScoreManager with help of ai,
+ can save .txt for more higscore feeling and sharing how many vicotries and time.
+
+Daytime, Ive check every class , enum and run the program couple of times, some few adjustments for both code and terminal, everything runs
+perfectly and also removed every //writing text I did for help on the road.
+Now im going to send it in.
+Couldn't understand how to package my files that i can have game package, dialog, enums etc etc...
+Will try to speak with my teacher later on.

@@ -1,7 +1,6 @@
 public abstract class Player {
     private final String name;
 
-    //    X or O
     private final CellState symbol;
 
     public Player(String name, CellState symbol) {
@@ -12,9 +11,6 @@ public abstract class Player {
                 this.symbol = symbol;
     }
 
-//    Shall return a move (row or colon) based on actual board
-//    Implements by HumanPlayer (Read input/ UI) and CPU Ai
-//    Method to call board.getAvailableMoves() but NOT update boardgame
 
     public abstract  Move getMove(Board board);
 

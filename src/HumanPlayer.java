@@ -29,11 +29,11 @@ public class HumanPlayer extends Player {
                 try {
                     row = Integer.parseInt(rowLine);
                 } catch (NumberFormatException e) {
-                    System.out.println("Invalid" + getName() + ", choose a number for row");
+                    System.out.println("Invalid " + getName() + ", choose a number for row");
                     continue;
                 }
                 if (row < 0 || row >= Board.SIZE) {
-                    System.out.println("Invalid row" + getName() + ", choose between number 0-" + (Board.SIZE - 1) + ".");
+                    System.out.println("Invalid row " + getName() + ", choose between number 0-" + (Board.SIZE - 1) + ".");
                     continue;
                 }
                 break;
@@ -56,7 +56,7 @@ public class HumanPlayer extends Player {
                 try {
                     col = Integer.parseInt(colLine);
                 } catch (NumberFormatException e) {
-                    System.out.println("Invalid" + getName() + ", choose a number for colon");
+                    System.out.println("Invalid " + getName() + ", choose a number for colon");
                     continue;
                 }
                 if (col < 0 || col >= Board.SIZE) {

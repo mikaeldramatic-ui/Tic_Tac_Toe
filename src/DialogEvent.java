@@ -4,7 +4,6 @@ public enum DialogEvent {
     WIN,
     LOSE,
     TIE,
-    BLOCK,
     ILLEGAL_MOVE
 }
 //

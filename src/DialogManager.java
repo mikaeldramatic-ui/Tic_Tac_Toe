@@ -19,14 +19,12 @@ public class DialogManager {
         eventProbability.put(DialogEvent.WIN, 1.0);
         eventProbability.put(DialogEvent.TIE, 1.0);
         eventProbability.put(DialogEvent.LOSE, 1.0);
-        eventProbability.put(DialogEvent.BLOCK, 0.9);
         eventProbability.put(DialogEvent.ILLEGAL_MOVE, 1.0);
     }
     private void initDefaultPhrases() {
         phrases.put(DialogEvent.PRE_MOVE,Arrays.asList(
                 "You're going down!!,",
                 "Let's see here",
-                "Let's Rock!",
                 "Meet your maker!"
         ));
 
@@ -39,8 +37,7 @@ public class DialogManager {
         phrases.put(DialogEvent.WIN,Arrays.asList(
                 "HA,I WIN!",
                 "The battle is won",
-                "Oh i'm sorry, should I call you loser now?",
-                "Winner starts with W and yours is L for LOOOOSER"
+                "Oh i'm sorry, should I call you loser now?"
                 ));
 
         phrases.put(DialogEvent.LOSE,Arrays.asList(
@@ -52,16 +49,10 @@ public class DialogManager {
 
         phrases.put(DialogEvent.TIE, Arrays.asList(
                 "HOW COULD THIS BE A TIE",
-                "TIE TIE TIE TIE, {Player}",
+                "TIE TIE TIE TIE",
                 "WE NEED A WINNER!"
                 ));
 
-        phrases.put(DialogEvent.BLOCK ,Arrays.asList(
-                "OH NOT TODAY!",
-                "Close but no cigarr",
-                "B is for...BLOCKING",
-                "Smell this!"
-                ));
         phrases.put(DialogEvent.ILLEGAL_MOVE,Arrays.asList(
                 "Play fair!",
                 "Learn the rules stupid!",
